@@ -11,10 +11,11 @@ app.listen(port);
 
 console.log('server running at ' + port);
 
+const root_path = __dirname
 // home page
 
 app.get('/', (req, res) => {
-    res.send('<h1>home</h1>');
+    res.sendFile("./view/index.html", {root:root_path});
 });
 
 
