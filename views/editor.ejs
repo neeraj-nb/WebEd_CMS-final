@@ -13,18 +13,26 @@
     </div>
 
     <div class="container mt-5">
+        
         <div class="row">
+
+
+            <% if (blogarray.length == 0){ %> 
+                <p>no blogs yet</p>
+          <%  }else{ %> 
+
+           <% blogarray.forEach(blog => { %>
 
             <div class="card text-left col-sm-11 col-md-5 my-1 mx-auto p-0">
                 <div class="card-header">
-                    <h2>Heading</h2>
+                    <h2><%= blog.heading %> </h2>
                 </div>
                 <div class="card-body">
-                    <h6 class="card-author">Special title treatment</h6>
-                    <p class="card-body">With supporting text below as a natural lead-in to additional content.</p>
+                    <h6 class="card-author"><%= blog.author %></h6>
+                    <p class="card-body"><%= blog.body %></p>
                 </div>
                 <div class="card-footer text-muted">
-                    2 days
+                    <%= blog.timestamp %>
                     <div class="d-flex justify-content-end">
                         <a href="" class="mr-4 text-danger"><i class="far fa-trash-alt"></i></a>
                         <a href="" class="mr-2 text-warning"><i class="far fa-edit"></i></a>
@@ -32,23 +40,12 @@
                 </div>
             </div>
 
+           
+          <% })}; %>
 
-            <div class="card text-left col-sm-11 col-md-5 my-1 mx-auto p-0 ">
-                <div class="card-header">
-                    <h2>Heading</h2>
-                </div>
-                <div class="card-body">
-                    <h6 class="card-author">Special title treatment</h6>
-                    <p class="card-body">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div class="card-footer text-muted ">
-                    2 days
-                    <div class="d-flex justify-content-end">
-                        <a href="" class="mr-4 text-danger"><i class="far fa-trash-alt"></i></a>
-                        <a href="" class="mr-2 text-warning"><i class="far fa-edit"></i></a>
-                    </div>
-                </div>
-            </div>
+           
+
+            
         </div>
     </div>
 

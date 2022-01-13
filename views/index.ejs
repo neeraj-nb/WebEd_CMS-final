@@ -8,54 +8,33 @@
 
      <%- include('./partials/nav.ejs') %>
 
+
+
     <div class="container mt-5 bg-white">
 
         <div class="row">
 
+            
+          <% if (blogarray.length == 0){ %> 
+                <p>no blogs yet</p>
+          <%  }else{ %> 
+
+           <% blogarray.forEach(blog => { %>
+
 
             <div class="card col-sm-11 col-md-5 my-1 mx-auto bg-white">
                 <div class="card-body bg-white">
-                    <h5 class="card-title">Heading</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Author</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                    <h5 class="card-title"><%= blog.heading %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= blog.author %></h6>
+                    <p class="card-text"><%= blog.body %> </p>
                     <a href="./blog" class="card-link">Card link</a>
                 </div>
             </div>
 
 
-            <div class="card col-sm-11 col-md-5 my-1 mx-auto bg-white">
-                <div class="card-body">
-                    <h5 class="card-title">Heading</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Author</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                </div>
-            </div>
+          <% })}; %>
 
-
-            <div class="card col-sm-11 col-md-5 my-1 mx-auto bg-white">
-                <div class="card-body">
-                    <h5 class="card-title">Heading</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Author</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                </div>
-            </div>
-
-
-            <div class="card col-sm-11 col-md-5 my-1 mx-auto bg-white">
-                <div class="card-body">
-                    <h5 class="card-title">Heading</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Author</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                </div>
-            </div>
-
+            
         </div>
     </div>
     <!-- <script src="./assets/script.js"></script> -->

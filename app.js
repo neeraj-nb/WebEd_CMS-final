@@ -1,25 +1,53 @@
 const express = require('express');
 const res = require('express/lib/response');
-const nodemon = require('nodemon');
-const morgan = require("morgan")
+const morgan = require("morgan");
+const mongoose = require("mongoose");
 
 
 const app = express();
 
+const port = 3000;
 
 app.set('view engine', 'ejs');
 
 
-const port = 3000;
-app.listen(port);
+// data base
 
 
-console.log('server running at ' + port);
+const dbURI = 'mongodb+srv://neerajbabu:neerajneeraj27@cluster0.lmdxk.mongodb.net/cms?retryWrites=true&w=majority';
+
+
+mongoose.connect(dbURI)
+     .then(result =>{
+         console.log("database connected");
+         app.listen(port);
+         console.log('server running at ' + port);
+
+
+     })
+     .catch(err =>{
+         console.log(err)
+     })
+
+  const blogarray = [
+    { heading : "heading", author : "author", body : "test 123", timestamp : "1:20 pm" },
+    { heading : "heading", author : "author", body : "test 123", timestamp : "1:20 pm" },
+    { heading : "heading", author : "author", body : "test 123", timestamp : "1:20 pm" }
+  ];
+
+
+
+
+
+
 
 
 
 app.use(morgan('dev'));
 
+
+// public files
+app.use(express.static('public'));
 
 
 
@@ -27,7 +55,7 @@ const root_path = __dirname
 // home page
 
 app.get('/', (req, res) => {
-    res.render('index' , { title:'Home'});
+    res.render('index' , { title:'Home', blogarray:blogarray});
 });
 
 
@@ -35,7 +63,7 @@ app.get('/', (req, res) => {
 // edit page
 
 app.get('/edit', (req, res) => {
-    res.render('editor',{ title:'Editor'});
+    res.render('editor',{ title:'Editor', blogarray:blogarray});
 });
 
 
