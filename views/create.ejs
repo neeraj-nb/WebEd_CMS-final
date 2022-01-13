@@ -16,18 +16,20 @@
             </div>
             <div class="row mt-2">
                 <div class="col-md-7 mx-auto">
-                    <form>
+
+
+                    <form action="/create" method="POST">
                         <div class="form-group">
                             <label for="heading">Heading</label>
-                            <input type="text" class="form-control" id="heading">
+                            <input type="text" class="form-control" id="heading" name="heading">
                         </div>
                         <div class="form-group">
-                            <label for="content">Content</label>
-                            <input type="text" class="form-control" id="content">
+                            <label for="content">Author</label>
+                            <input type="text" class="form-control" id="content" name="author">
                         </div>
                         <div class="form-group">
-                            <label for="author">Author</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <label for="author">Content</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary ml-md-5">Create</button>
                     </form>

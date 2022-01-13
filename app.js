@@ -3,6 +3,8 @@ const res = require('express/lib/response');
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 
+const Blog = require('./model/blog.js')
+
 
 const app = express();
 
@@ -50,6 +52,8 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 
 
+// url encoder
+app.use(express.urlencoded({extended:true}));
 
 const root_path = __dirname
 // home page
@@ -77,6 +81,17 @@ app.get('/blog', (req, res) => {
 
 app.get('/create', (req, res) => {
     res.render('create',{ title:'Create'});
+});
+
+app.post('/create', (req, res) => {
+
+    const blog = new Blog(req.body);
+
+    blog.save()
+       .then(result =>{
+           res.redirect('/')
+       })
+       .catch(err => console.log(err))
 });
 
 // about page
