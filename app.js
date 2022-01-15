@@ -31,17 +31,7 @@ mongoose.connect(dbURI)
          console.log(err)
      })
 
-  const blogarray = [
-    { heading : "heading", author : "author", body : "test 123", timestamp : "1:20 pm" },
-    { heading : "heading", author : "author", body : "test 123", timestamp : "1:20 pm" },
-    { heading : "heading", author : "author", body : "test 123", timestamp : "1:20 pm" }
-  ];
-
-
-
-
-
-
+ 
 
 
 
@@ -59,7 +49,17 @@ const root_path = __dirname
 // home page
 
 app.get('/', (req, res) => {
-    res.render('index' , { title:'Home', blogarray:blogarray});
+  
+
+    Blog.find().sort({ createdAt: -1})
+        .then(result => {
+            res.render('index' , { title:'Home', blogarray:result});
+
+        })
+        .catch(err => {console.log(err)});
+
+
+
 });
 
 
@@ -67,20 +67,47 @@ app.get('/', (req, res) => {
 // edit page
 
 app.get('/edit', (req, res) => {
-    res.render('editor',{ title:'Editor', blogarray:blogarray});
+
+      Blog.find().sort({ createdAt: -1})
+        .then(result => {
+            res.render('editor' , { title:'Editor', blogarray:result});
+
+        })
+        .catch(err => {console.log(err)});
+
 });
 
 
 // blog page
 
-app.get('/blog', (req, res) => {
-    res.render('blog',{ title:'Blog'});
+app.get('/blog/:id', (req, res) => {
+
+
+     Blog.findById(req.params.id)
+          .then(result => {
+            res.render('blog',{ title:'Blog', data:result});
+          })
+          .catch(err =>{ console.log(err)})
+     
+});
+
+app.delete('/blog/:id', (req, res) => {
+     const response = {
+         status : "sucess"
+     }
+
+    Blog.findByIdAndDelete(req.params.id)
+         .then(result => {
+           res.json(response)
+         })
+         .catch(err =>{ console.log(err)})
+    
 });
 
 // create page
 
 app.get('/create', (req, res) => {
-    res.render('create',{ title:'Create'});
+    res.render('create',{ title:'Create', head:"create blog"});
 });
 
 app.post('/create', (req, res) => {
@@ -89,10 +116,41 @@ app.post('/create', (req, res) => {
 
     blog.save()
        .then(result =>{
-           res.redirect('/')
+           res.redirect('/edit')
        })
        .catch(err => console.log(err))
 });
+
+
+// edit blog
+
+
+app.get('/editblog/:id', (req, res) => {
+
+
+    Blog.findById(req.params.id)
+    .then(result => {
+        res.render('editblog',{ title:'Edit blog', head:"Edit blog", blog:result});
+    })
+    .catch(err =>{ console.log(err)})
+
+});
+
+app.post('/editblog/:id', (req,res) =>{
+      console.log(req.body);
+      const response = {
+          status:"sucess"
+      }
+       
+      const data = req.body
+      Blog.findByIdAndUpdate(req.params.id, { heading:data.heading, author:data.author, body:data.body})
+          .then(result =>{ 
+              res.redirect('/edit')
+            })
+          .catch(err => {console.log(err)})
+          
+     
+})
 
 // about page
 

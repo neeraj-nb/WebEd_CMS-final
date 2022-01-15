@@ -12,24 +12,24 @@
 
         <div class="jumbotron col-12">
             <div class="row mb-2 d-block">
-                <h1 class=" text-capitalize text-center mx-auto">create post</h1>
+                <h1 class=" text-capitalize text-center mx-auto"><%= head %> </h1>
             </div>
             <div class="row mt-2">
                 <div class="col-md-7 mx-auto">
 
 
-                    <form action="/create" method="POST">
+                    <form class="needs-validation" novalidate action="/create" method="POST">
                         <div class="form-group">
-                            <label for="heading">Heading</label>
-                            <input type="text" class="form-control" id="heading" name="heading">
+                            <label for="validationCustom01">Heading</label>
+                            <input type="text" class="form-control" id="validationCustom01" name="heading" required>
                         </div>
                         <div class="form-group">
-                            <label for="content">Author</label>
-                            <input type="text" class="form-control" id="content" name="author">
+                            <label for="validationCustom02">Author</label>
+                            <input type="text" class="form-control" id="validationCustom02" name="author" required>
                         </div>
                         <div class="form-group">
-                            <label for="author">Content</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
+                            <label for="validationCustom03">Content</label>
+                            <textarea class="form-control" id="validationCustom03" rows="3" name="body" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary ml-md-5">Create</button>
                     </form>
@@ -38,6 +38,27 @@
         </div>
     </div>
 
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
