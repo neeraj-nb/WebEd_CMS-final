@@ -61,6 +61,8 @@
 
             var endpoint = `/blog/${id}`
 
+            if(window.confirm("Do you want to delete the blog?") == true){
+
              fetch(endpoint,{
                  method:"DELETE"
              })
@@ -69,6 +71,7 @@
                 .catch(err => console.log(err))
              )
              .catch(err => console.log(err))
+            }
         }
 
 
