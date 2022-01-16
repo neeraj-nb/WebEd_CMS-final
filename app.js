@@ -3,7 +3,7 @@ const res = require('express/lib/response');
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const dotenv = require('dotenv');
-
+const md = require('markdown-it')();
 
 dotenv.config();
 
@@ -89,7 +89,7 @@ app.get('/blog/:id', (req, res) => {
 
      Blog.findById(req.params.id)
           .then(result => {
-            res.render('blog',{ title:'Blog', data:result});
+            res.render('blog',{ title:'Blog', data:result, body:md.render(result.body) });
           })
           .catch(err =>{ console.log(err)})
      

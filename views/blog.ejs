@@ -16,7 +16,7 @@
                 <% let name = month[data.createdAt.getMonth()]; %> 
                  
                 <h5 class="text-muted"><%= data.author %> | <%= data.createdAt.getDate() %> <%= name %>  <%= data.createdAt.getUTCFullYear() %>  </h5>
-                <p class="body"><%= data.body %> </p>
+                  <%- body %> 
             </div>
         </div>
     </div>
