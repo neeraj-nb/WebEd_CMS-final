@@ -2,13 +2,17 @@ const express = require('express');
 const res = require('express/lib/response');
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const dotenv = require('dotenv');
+
+
+dotenv.config();
 
 const Blog = require('./model/blog.js')
 
 
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 
@@ -16,7 +20,7 @@ app.set('view engine', 'ejs');
 // data base
 
 
-const dbURI = 'mongodb+srv://neerajbabu:neerajneeraj27@cluster0.lmdxk.mongodb.net/cms?retryWrites=true&w=majority';
+const dbURI = `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@cluster0.lmdxk.mongodb.net/cms?retryWrites=true&w=majority`;
 
 
 mongoose.connect(dbURI)
@@ -152,11 +156,7 @@ app.post('/editblog/:id', (req,res) =>{
      
 })
 
-// about page
 
-app.get('/about', (req, res) => {
-    res.render('about',{ title:'About'});
-});
 //404 page
 
 app.use((req, res) => {

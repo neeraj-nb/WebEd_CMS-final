@@ -12,7 +12,10 @@
         <div class="jumbotron jumbotron-fluid pt-3">
             <div class="container m-4 ">
                 <h1 class="display-4"><%= data.heading %> </h1>
-                <h5 class="text-muted"><%= data.author %> | <%= data.createdAt %></h5>
+                <% const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]; %> 
+                <% let name = month[data.createdAt.getMonth()]; %> 
+                 
+                <h5 class="text-muted"><%= data.author %> | <%= data.createdAt.getDate() %> <%= name %>  <%= data.createdAt.getUTCFullYear() %>  </h5>
                 <p class="body"><%= data.body %> </p>
             </div>
         </div>

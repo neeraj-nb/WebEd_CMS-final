@@ -32,7 +32,10 @@
                     <p class="card-body"><%= blog.body %></p>
                 </div>
                 <div class="card-footer text-muted">
-                    <%= blog.timestamp %>
+
+                    <% const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]; %> 
+                    <% let name = month[blog.createdAt.getMonth()]; %> 
+                    <%= blog.createdAt.getDate() %> <%= name %>  <%= blog.createdAt.getUTCFullYear() %> 
                     <div class="d-flex justify-content-end">
                         <a href="" class="mr-4 text-danger" ><i class="far fa-trash-alt" onclick="deleteblog(event)" id="<%= blog._id %>"></i></a>
                         <a href="" class="mr-2 text-warning"><i class="far fa-edit" onclick="editblog(event)" id="<%= blog._id %>"></i></a>
