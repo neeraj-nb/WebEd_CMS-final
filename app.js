@@ -4,8 +4,10 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const dotenv = require('dotenv');
 const md = require('markdown-it')();
+var emoji = require('markdown-it-emoji');
 
 dotenv.config();
+md.use(emoji);
 
 const Blog = require('./model/blog.js')
 
